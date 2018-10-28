@@ -98,7 +98,7 @@ android {
     buildToolsVersion rootProject.ext.buildToolsVersion
 
     defaultConfig {
-        applicationId "com.awesomeproject"
+        applicationId "com.airbnb.android.react.maps.example"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
@@ -151,6 +151,8 @@ dependencies {
             force = true
         }
     }
+    // for react-Native map module
+    implementation project(':react-native-maps')
 }
 
 // Run this once to be able to run the application with BUCK
