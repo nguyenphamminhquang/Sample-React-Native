@@ -1,60 +1,66 @@
  'use strict';
 import React, { Component } from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { RNCamera } from 'react-native-camera';
+import { StyleSheet, Text, TouchableOpacity, View,   FlatList, ActivityIndicator } from 'react-native';
+import componentData from './mock/sampleComponent.json';
 
-const PendingView = () => (
-  <View
-    style={{
-      flex: 1,
-      backgroundColor: 'lightgreen',
-      justifyContent: 'center',
-      alignItems: 'center',
-    }}
-  >
-    <Text>Waiting</Text>
-  </View>
-);
+export default class App extends Component {
+  constructor(props){
+     super(props);
+     this.state = {
+       isLoading: true, //check data is loading or not
+       dataSource: [], //store data object
+     };
+  }
 
-type Props = {};
-export default class App extends Component<Props> {
+  componentDidMount(){
+    this.setState({
+              isLoading: false, // already loading
+              dataSource: componentData
+            });
+  }
+
   render() {
+    if (this.state.isLoading){
+      return(
+        <View style={{flex: 1, padding: 20}}>
+          <ActivityIndicator/>
+        </View>
+      )
+    }
     return (
       <View style={styles.container}>
-        <RNCamera
-          style={styles.preview}
-          type={RNCamera.Constants.Type.back}
-          flashMode={RNCamera.Constants.FlashMode.on}
-          permissionDialogTitle={'Permission to use camera'}
-          permissionDialogMessage={'We need your permission to use your camera phone'}
-        >
-          {({ camera, status }) => {
-            if (status !== 'READY') return <PendingView />;
+       <FlatList
+          data={this.state.dataSource}
+          renderItem={({item}) => {
             return (
-              <View style={{ flex: 0, flexDirection: 'row', justifyContent: 'center' }}>
-                <TouchableOpacity onPress={() => this.takePicture(camera)} style={styles.capture}>
-                  <Text style={{ fontSize: 14 }}> SNAP </Text>
-                </TouchableOpacity>
+              <View>
+                <Text>-------Start----------</Text>
+                <Text>Type is {item.type} </Text>
+                <Text>Text is {item.text} </Text>
+                <Text>Hint is {item.hint} </Text>
+                <Text>---------Style-------- </Text>
+                <Text>fontFamily is {item.style.fontFamily} </Text>
+                <Text>fontStyle is {item.style.fontStyle} </Text>
+                <Text>fontSize is {item.style.fontSize} </Text>
+                <Text>color is {item.style.color} </Text>
+                <Text>alignment is {item.style.alignment} </Text>
+                <Text>-------End----------</Text>
               </View>
-            );
+            )
           }}
-        </RNCamera>
+          keyExtractor={(item, index) => index.toString()}
+        />
       </View>
     );
   }
 
-  takePicture = async function(camera) {
-    const options = { quality: 0.5, base64: true };
-    const data = await camera.takePictureAsync(options);
-    //  eslint-disable-next-line
-    console.log(data.uri);
-  }
 }
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'column',
-    backgroundColor: 'black',
+    backgroundColor: 'white',
   },
   preview: {
     flex: 1,

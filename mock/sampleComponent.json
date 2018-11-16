@@ -1,0 +1,25 @@
+[
+{ 
+  "type": "textview",
+  "text": "Fus ro DAH!", 
+  "style": { 
+    "fontFamily": "OpenSans", 
+    "fontStyle": "Regular", 
+    "fontSize": 18, 
+    "color": "#FF0000", 
+    "alignment": "center" 
+    }
+}, 
+  
+{ 
+  "type": "edittext", 
+  "hint": "hinthint",
+  "style": { 
+    "fontFamily": "OpenSans", 
+    "fontStyle": "Regular", 
+    "fontSize": 18, 
+    "color": "#FF0000" 
+  }
+}
+]
+
