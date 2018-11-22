@@ -4,7 +4,7 @@
   "text": "Fus ro DAH!", 
   "style": { 
     "fontFamily": "OpenSans", 
-    "fontStyle": "Regular", 
+    "fontStyle": "Bold", 
     "fontSize": 18, 
     "color": "#FF0000", 
     "alignment": "center" 

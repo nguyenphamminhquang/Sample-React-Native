@@ -2,7 +2,8 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View,   FlatList, ActivityIndicator } from 'react-native';
 import componentData from './mock/sampleComponent.json';
-import Quote from "./components/Quote";
+import BaseTextView from './components/BaseTextView.js';
+import BaseEditText from './components/BaseEditText.js';
 export default class App extends Component {
   constructor(props){
      super(props);
@@ -32,27 +33,14 @@ export default class App extends Component {
        <FlatList
           data={this.state.dataSource}
           renderItem={({item}) => {
-            return (
-              <View>
-                <Text>-------Start----------</Text>
-                <Text>Type is {item.type} </Text>
-                <Text>Text is {item.text} </Text>
-                <Text>Hint is {item.hint} </Text>
-                <Text>---------Style-------- </Text>
-                <Text>fontFamily is {item.style.fontFamily} </Text>
-                <Text>fontStyle is {item.style.fontStyle} </Text>
-                <Text>fontSize is {item.style.fontSize} </Text>
-                <Text>color is {item.style.color} </Text>
-                <Text>alignment is {item.style.alignment} </Text>
-                <Text>-------End----------</Text>
-              </View>
-            )
+            if(item.type == "textview")
+            return (<BaseTextView data = {item} />)
+            if(item.type == "edittext")
+            return (<BaseEditText data = {item} />)
           }}
           keyExtractor={(item, index) => index.toString()}
         />
-        <Quote 
-      QuoteText="If God is your partner, make your plans BIG!" 
-      QuoteAuthor="D.L. Moody" />
+        
       </View>
     );
   }
@@ -64,19 +52,5 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     backgroundColor: 'white',
-  },
-  preview: {
-    flex: 1,
-    justifyContent: 'flex-end',
-    alignItems: 'center',
-  },
-  capture: {
-    flex: 0,
-    backgroundColor: '#fff',
-    borderRadius: 5,
-    padding: 15,
-    paddingHorizontal: 20,
-    alignSelf: 'center',
-    margin: 20,
-  },
+  }
 });
