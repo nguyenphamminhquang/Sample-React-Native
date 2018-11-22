@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View,   FlatList, ActivityIndicator } from 'react-native';
 import componentData from './mock/sampleComponent.json';
-
+import Quote from "./components/Quote";
 export default class App extends Component {
   constructor(props){
      super(props);
@@ -50,6 +50,9 @@ export default class App extends Component {
           }}
           keyExtractor={(item, index) => index.toString()}
         />
+        <Quote 
+      QuoteText="If God is your partner, make your plans BIG!" 
+      QuoteAuthor="D.L. Moody" />
       </View>
     );
   }
